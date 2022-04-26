@@ -41,5 +41,8 @@ build/
 .idea
 .DS_Store
 */**/.DS_Store
+test/*
+c2/
+
 
 
