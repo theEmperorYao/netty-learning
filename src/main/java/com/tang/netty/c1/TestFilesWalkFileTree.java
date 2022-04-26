@@ -20,6 +20,11 @@ public class TestFilesWalkFileTree {
 
 //        m1();
 //        m2();
+        m3();
+
+    }
+
+    public static void m3() throws IOException {
         Files.walkFileTree(Paths.get("E:\\Code\\netty-learning\\helloworld"), new SimpleFileVisitor<Path>() {
 
 
@@ -37,7 +42,6 @@ public class TestFilesWalkFileTree {
                 return super.postVisitDirectory(dir, exc);
             }
         });
-
     }
 
     private static void m2() throws IOException {
