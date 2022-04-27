@@ -30,6 +30,16 @@ import java.util.concurrent.*;
 public class Test01 {
 
     @Test
+    void test04() {
+        int i = 10 >> 2;
+        int a = 10 << 2;
+        int mid = 10 + ((20 - 10) >> 1);
+        System.out.println("mid = " + mid);
+        System.out.println("a = " + a);
+        System.out.println("i = " + i);
+    }
+
+    @Test
     void test03() throws IOException {
         Path path = Paths.get("E:\\Code\\netty-learning\\helloworld\\a\\b");
         Files.createDirectories(path);
