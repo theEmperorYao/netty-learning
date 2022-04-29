@@ -14,7 +14,7 @@ import java.nio.charset.Charset;
  * @Version: 1.0
  */
 
-public class Client {
+public class Client2 {
     public static void main(String[] args) throws IOException {
         SocketChannel sc = SocketChannel.open();
         sc.connect(new InetSocketAddress("localhost", 8080));

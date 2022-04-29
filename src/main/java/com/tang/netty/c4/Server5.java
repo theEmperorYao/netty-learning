@@ -6,13 +6,15 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.*;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Set;
 
 import static com.tang.netty.c1.ByteBufferUtil.debugAll;
-import static com.tang.netty.c1.ByteBufferUtil.debugRead;
 
 /**
  * @Title: Server
@@ -22,7 +24,7 @@ import static com.tang.netty.c1.ByteBufferUtil.debugRead;
  * @Version: 1.0
  */
 @Slf4j
-public class Server4 {
+public class Server5 {
 
     /**
      * （1)Socket 和ServerSocket 是一对 他们是java.net下面实现socket通信的类
@@ -89,9 +91,7 @@ public class Server4 {
                         if (read == -1) {
                             key.cancel();
                         } else {
-                            buffer.flip();
-                            System.out.println(Charset.defaultCharset().decode(buffer));
-//                            debugRead(buffer);
+                            split(buffer);
                         }
 
                     } catch (IOException e) {
