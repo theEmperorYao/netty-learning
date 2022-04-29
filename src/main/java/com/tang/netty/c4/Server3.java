@@ -47,6 +47,7 @@ public class Server3 {
         ssc.bind(new InetSocketAddress(8080));
         while (true) {
             // 3、select 方法,没有事件发生，线程阻塞，有事件。线程才会回复运行
+            // select 在事件未处理时，他不会阻塞
             selector.select();
 
             //4、处理事件,selectedKeys 内部包含了所有发生的事件
@@ -54,10 +55,10 @@ public class Server3 {
             while (iterator.hasNext()) {
                 SelectionKey key = iterator.next();
                 log.debug("key:{}", key);
-                ServerSocketChannel channel = (ServerSocketChannel) key.channel();
-                SocketChannel sc = channel.accept();
-                log.debug("{}", sc);
-
+//                ServerSocketChannel channel = (ServerSocketChannel) key.channel();
+//                SocketChannel sc = channel.accept();
+//                log.debug("{}", sc);
+                key.cancel();
             }
 
 
