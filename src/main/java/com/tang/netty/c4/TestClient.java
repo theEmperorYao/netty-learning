@@ -1,26 +1,22 @@
 package com.tang.netty.c4;
 
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 
 /**
- * @Title: Client
- * @Description:
- * @author: tangyao
- * @date: 2022/4/27 15:36
- * @Version: 1.0
+ * @Classname TestClient
+ * @Description TODO
+ * @Date 2022/5/3 16:15
+ * @Author by tangyao
  */
-
-public class Client2 {
+public class TestClient {
     public static void main(String[] args) throws IOException {
         SocketChannel sc = SocketChannel.open();
         sc.connect(new InetSocketAddress("localhost", 8080));
-        sc.write(Charset.defaultCharset().encode("hell333333333fgfgfgfgg33333o\nWorld\n"));
-        sc.write(Charset.defaultCharset().encode("hell3333o\nWorld\n"));
-
+        sc.write(Charset.defaultCharset().encode("123456789abcdef"));
         System.in.read();
+
     }
 }

@@ -77,7 +77,10 @@ public class Server5 {
                     ServerSocketChannel channel = (ServerSocketChannel) key.channel();
                     SocketChannel sc = channel.accept();
                     sc.configureBlocking(false);
-                    SelectionKey scKey = sc.register(selector, 0, null);
+                    //attachment
+                    ByteBuffer buffer = ByteBuffer.allocate(16);
+                    //将一个byteBuffer 作为附件关联到selectionKey
+                    SelectionKey scKey = sc.register(selector, 0, buffer);
                     scKey.interestOps(SelectionKey.OP_READ);
 
                     log.debug("{}", sc);
@@ -85,14 +88,23 @@ public class Server5 {
                     //拿到触发事件的channel
                     try {
                         SocketChannel channel = (SocketChannel) key.channel();
-                        ByteBuffer buffer = ByteBuffer.allocate(4);
+
+                        // 获取 作为附件关联到selectionKey附件
+                        ByteBuffer buffer = (ByteBuffer) key.attachment();
                         // 如果是正常断开，read的方法返回值是-1
                         int read = channel.read(buffer);
                         if (read == -1) {
                             key.cancel();
                         } else {
                             split(buffer);
+                            if (buffer.position() == buffer.limit()) {
+                                ByteBuffer newBuffer = ByteBuffer.allocate(buffer.capacity() * 2);
+                                buffer.flip();
+                                newBuffer.put(buffer);
+                                key.attach(newBuffer);
+                            }
                         }
+
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -125,6 +137,7 @@ public class Server5 {
                 debugAll(target);
             }
         }
+        //
         source.compact();
     }
 }
