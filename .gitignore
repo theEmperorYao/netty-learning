@@ -42,7 +42,7 @@ build/
 .DS_Store
 */**/.DS_Store
 test/*
-c2/
+src/main/java/com/tang/netty/c2/
 
 
 
